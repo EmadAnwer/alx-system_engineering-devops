@@ -4,7 +4,7 @@
 file="school"
 if [ ! -e $file ]
 then
-	echo "$file does not exist"
+	echo "$file file does not exist"
 	exit
 else
 	echo "$file file exists"
