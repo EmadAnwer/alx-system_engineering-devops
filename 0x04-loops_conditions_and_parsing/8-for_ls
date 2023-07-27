@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # displays the time for 12 hours and 59 minutes
 
-LS_LIST=`ls`
-x=""
+LS_LIST=$(ls)
 for l in $LS_LIST 
 	do
 		echo "${l#*-}"
