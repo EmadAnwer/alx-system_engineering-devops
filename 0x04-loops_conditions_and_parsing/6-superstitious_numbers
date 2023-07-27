@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# This script is displays numbers from 1 to 20 with bad luck from ... in 4, 9, 17
+
+counter=0
+
+while [ $counter -lt 20 ]
+	do
+
+		(( counter++ ))
+		echo "$counter"
+		case $counter in
+
+			4)
+			echo "bad luck from China"
+			;;
+
+			9)
+			echo "bad luck from Japan"
+			;;
+
+			17)
+			echo "bad luck from Italy"
+			;;
+		esac
+done
