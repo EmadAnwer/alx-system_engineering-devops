@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# displays the content of the file /etc/passwd.
+
+var=$(cat /etc/passwd)
+
+while IFS=: read -r -a arr; 
+	do
+    	echo "The user ${arr[0]} is part of the ${arr[3]} gang, lives in ${arr[5]} and rides ${arr[6]}. ${arr[2]}'s place is protected by the passcode ${arr[1]}, more info about the user here: ${arr[4]}"
+	done <<< "$var"
