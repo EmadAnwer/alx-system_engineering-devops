@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script is displaying "Best School" 10 times
+# displays the time for 12 hours and 59 minutes
 
 h=0
 
