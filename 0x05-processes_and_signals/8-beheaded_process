@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# ddisplays To infinity and beyond indefinitely.
+
+
+# get 4-to_infinity_and_beyond prosses id
+pid=$(pgrep -f './7-highlander')
+# end the prosses
+kill -9 "$pid"
