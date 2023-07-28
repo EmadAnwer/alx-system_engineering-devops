@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# displays its own PID.
-ps -ef -u --forest
+# displays a list of currently running processes.
+
+ps -ax -uf 
