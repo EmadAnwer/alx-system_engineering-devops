@@ -4,4 +4,4 @@
 # get 4-to_infinity_and_beyond prosses id
 pid=$(pgrep -f './4-to_infinity_and_beyond')
 # end the prosses
-kill [SIGINT] $pid
+kill "$pid"
