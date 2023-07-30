@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Displays "To infinity and beyond" indefinitely.
+
+echo "$$" > /var/run/myscript.pid
+
+terminate_handler() 
+{
+	echo "I hate the kill command"
+	rm "/var/run/myscript.pid"
+	exit 0
+}
+# Register the terminate_handler function to catch the SIGTERM signal
+trap 'terminate_handler' SIGTERM
+
+
+t_handler() 
+{
+	echo "Y U no love me?!"
+}
+# Register the t_handler function to catch the SIGINT signal
+trap 't_handler' SIGINT
+
+
+d_handler() 
+{
+	rm "/var/run/myscript.pid"
+	exit 0
+}
+# Register the d_handler function to catch the SIGQUIT signal
+trap 'd_handler' SIGQUIT
+
+
+while 'true'
+do
+	echo "To infinity and beyond"
+done
