@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# shows listening sockets ,  shows the PID and name of the progarm
+
+netstat -lp
