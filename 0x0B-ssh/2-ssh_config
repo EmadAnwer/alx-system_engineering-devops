@@ -1,0 +1,5 @@
+Host 377545-web-01
+    HostName 35.153.79.242
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
