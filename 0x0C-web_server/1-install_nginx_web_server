@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# install nginx and listening on port 80 in server
+apt-get -y install nginx;
+# remove default html example and create new index.html
+rm var/www/html/index.nginx-debian.html
+echo "Hello World!" > var/www/html/index.html
