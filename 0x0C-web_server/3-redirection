@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# install nginx, change root content and redirect to youtube link
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+sudo sed -i '24i\    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }' /etc/nginx/sites-available/default
+sudo service nginx start
+sudo nginx -s reload
