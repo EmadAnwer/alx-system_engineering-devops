@@ -15,19 +15,19 @@ file{'/etc/nginx/sites-available/default':
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
 
-    root /usr/share/nginx/html;
+    root /var/www/html;
     index index.html index.htm;
 
     server_name localhost;
-
+    error_page 404 /404.html;
     location / {
         try_files $uri $uri/ =404;
-      }
-    loccation /redirect_me {
+    }
+
+    location /redirect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-      }
-    error_page 404 /404.html;
-    }',
+    }
+}',
   require => Package['nginx'],
   notify => Service['nginx'],
   replace => 'true',
