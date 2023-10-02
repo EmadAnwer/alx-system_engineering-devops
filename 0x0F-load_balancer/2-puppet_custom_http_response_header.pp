@@ -28,19 +28,19 @@ file{'/etc/nginx/sites-available/default':
     }
 }",
   require => Package['nginx'],
-  notify => Service['nginx'],
+  notify  => Service['nginx'],
   replace => 'true',
 }
 
 file {'/var/www/html/index.html':
-  ensure => 'file',
+  ensure  => 'file',
   content => 'Hello World!',
   require => Package['nginx'],
-  notify => Service['nginx'],
+  notify  => Service['nginx'],
   }
 
 file {'/var/www/html/404.html':
-  ensure => 'file',
+  ensure  => 'file',
   content => "Ceci n'est pas une page",
   require => Package['nginx'],
-  notify => Service['nginx'],}
+  notify  => Service['nginx'],}
