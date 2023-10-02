@@ -21,7 +21,7 @@ file{'/etc/nginx/sites-available/default':
     server_name localhost;
     error_page 404 /404.html;
     location / {
-        try_files $uri $uri/ =404;
+        try_files \$uri \$uri/ =404;
     }
 
     location /redirect_me {
