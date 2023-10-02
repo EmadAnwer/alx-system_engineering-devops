@@ -1,31 +1,46 @@
-#configure servers
+# configure an Nginx
 
-exec { 'install_nginx':
-command  => 'apt -y update; apt -y install nginx',
-provider => 'shell'
+package{ 'nginx':
+  ensure => 'installed',
 }
 
-file { '/var/www/html/index.html':
-ensure  => 'present',
-content => 'Hello World!',
-require => Exec['install_nginx'],
+service{ 'nginx':
+  ensure => 'running',
+  enable => 'true',
 }
 
-file { '/var/www/html/404.html':
-ensure  => 'present',
-content => "Ceci n'est pas une page",
-require => Exec['install_nginx'],
+file{'/etc/nginx/sites-available/default':
+  ensure => 'file',
+  content => "server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    add_header X-Served-By ${hostname};
+    root /var/www/html;
+    index index.html index.htm;
+    server_name localhost;
+    error_page 404 /404.html;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}",
+  require => Package['nginx'],
+  notify => Service['nginx'],
+  replace => 'true',
 }
 
+file {'/var/www/html/index.html':
+  ensure => 'file',
+  content => 'Hello World!',
+  require => Package['nginx'],
+  notify => Service['nginx'],
+  }
 
-
-file_line { 'add header':
-path  => '/etc/nginx/sites-enabled/default',
-match => 'server_name _;$',
-line  => "\tserver_name _;\n\tadd_header X-Served-By ${hostname};",
-}
-
-exec { 'run':
-command  => 'sudo service nginx restart',
-provider => shell,
-}
+file {'/var/www/html/404.html':
+  ensure => 'file',
+  content => "Ceci n'est pas une page",
+  require => Package['nginx'],
+  notify => Service['nginx'],}
