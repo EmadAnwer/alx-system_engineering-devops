@@ -1,18 +1,20 @@
 # configure an Nginx
 
-package{ 'nginx':
-  ensure => 'installed',
+exec { 'update':
+  command  => 'sudo apt-get update',
+  provider => shell,
 }
-
-service{ 'nginx':
-  ensure => 'running',
-  enable => 'true',
+-> package {'nginx':
+  ensure => present,
 }
-file_line{'custom HTTP header':
-  path    => '/etc/nginx/sites-available/default',
-  line    => "        add_header X-Served-By ${hostname};",
-  after   => 'server_name _;',
-  match   => '^server_name _;',
-  notify  => Service['nginx'],
-  require => Package['nginx'],
+-> file_line { 'header line':
+  ensure => present,
+  path   => '/etc/nginx/sites-available/default',
+  line   => "	location / {
+  add_header X-Served-By ${hostname};",
+  match  => '^\tlocation / {',
+}
+-> exec { 'restart service':
+  command  => 'sudo service nginx restart',
+  provider => shell,
 }
