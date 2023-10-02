@@ -13,14 +13,13 @@ file{'/etc/nginx/sites-available/default':
   ensure => 'file',
   content => "server {
     listen 80 default_server;
-    listen [::]:80 default_server ipv6only=on;
 
+    add_header X-Served-By ${hostname};
     root /var/www/html;
     index index.html index.htm;
     server_name localhost;
     error_page 404 /404.html;
     location / {
-        add_header X-Served-By ${hostname};
         try_files \$uri \$uri/ =404;
     }
 
