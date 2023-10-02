@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# install nginx, add custom header, and redirect to youtube
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+sudo sh -c 'printf "Ceci n'\''est pas une page\n" > /var/www/html/404.html'
+sudo sh -c 'echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /var/www/html;
+    index index.html index.htm;
+	add_header X-Served-By $(hostname);
+    server_name localhost;
+    error_page 404 /404.html;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}" > /etc/nginx/sites-available/default'
+sudo service nginx start
+sudo nginx -s reload
