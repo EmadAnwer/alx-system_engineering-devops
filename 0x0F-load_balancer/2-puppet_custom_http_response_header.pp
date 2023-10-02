@@ -17,10 +17,10 @@ file{'/etc/nginx/sites-available/default':
 
     root /var/www/html;
     index index.html index.htm;
-    add_header X-Served-By ${hostname};
     server_name localhost;
     error_page 404 /404.html;
     location / {
+        add_header X-Served-By ${hostname};
         try_files \$uri \$uri/ =404;
     }
 
