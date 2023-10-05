@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# display information about subdomains.
+
+if [ $# -eq 2 ]; then
+	my_ip=$(dig $2.$1 | awk '/ANSWER SECTION/ {getline; print $5}')
+	record_type=$(dig $2.$1 | awk '/ANSWER SECTION/ {getline; print $4}')
+	echo "The subdomain $2 is a $record_type record and points to $my_ip"
+elif [ $# -eq 1 ]; then
+	declare subdomains=('www' 'lb-01' 'web-01' 'web-02')
+	for subdomain in ${subdomains[@]}; do
+		my_ip=$(dig $subdomain.$1 | awk '/ANSWER SECTION/ {getline; print $5}')
+		record_type=$(dig $subdomain.$1 | awk '/ANSWER SECTION/ {getline; print $4}')
+		echo "The subdomain $subdomain is a $record_type record and points to $my_ip"
+	done
+fi
