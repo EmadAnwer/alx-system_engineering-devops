@@ -1,0 +1,12 @@
+frontend lb-01
+    bind *:80 transparent
+    bind *:443 ssl crt /home/ubuntu/haproxy.pem
+    http-request redirect scheme https code 301 unless { ssl_fc }
+    mode http
+    default_backend webservers
+
+backend webservers
+    mode http
+    balance roundrobin
+    server 377545-web-01 35.153.79.242:80
+    server 377545-web-02 52.201.164.137:80
