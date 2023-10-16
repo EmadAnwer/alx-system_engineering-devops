@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script that accepts one argument, the name of the user to run the command as
+
+sudo -u "$1" whoami
