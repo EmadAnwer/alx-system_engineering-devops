@@ -1,0 +1,9 @@
+sudo apt install ufw -y
+sudo ufw disable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo sed -i '/# rules.before/a *nat\n:PREROUTING ACCEPT [0:0]\n-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080\nCOMMIT' /etc/ufw/before.rules
+echo 'y'| sudo ufw enable
