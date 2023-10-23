@@ -33,4 +33,4 @@ if __name__ == "__main__":
             writer.writerow([f"{user_ID}",
                              f"{emp_name}",
                              f"{task.get('completed')}",
-                             f"{task.get('completed')}",])
+                             f"{task.get('title')}",])
