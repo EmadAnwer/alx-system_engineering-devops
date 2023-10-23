@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """gather data from API save to csv"""
 
-
-import requests
 import json
+import requests
 from sys import argv
 
 
