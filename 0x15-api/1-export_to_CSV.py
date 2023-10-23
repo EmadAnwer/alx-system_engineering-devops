@@ -16,7 +16,7 @@ if __name__ == "__main__":
     employee_data = requests.get(f'{URL}/users/{user_ID}').json()
     if employee_data == {}:
         exit()
-    emp_name = employee_data.get('name')
+    username = employee_data.get('username')
 
     # get all Tasks for all employees
     tasks_list = requests.get(f'{URL}/todos').json()
@@ -31,6 +31,6 @@ if __name__ == "__main__":
         # "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
         for task in employee_tasks_list:
             writer.writerow([f"{user_ID}",
-                             f"{emp_name}",
+                             f"{username}",
                              f"{task.get('completed')}",
                              f"{task.get('title')}",])
