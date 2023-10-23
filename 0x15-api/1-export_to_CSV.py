@@ -30,7 +30,7 @@ if __name__ == "__main__":
         writer = csv.writer(file)
         # "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
         for task in employee_tasks_list:
-            writer.writerow([f"{user_ID}",
-                             f"{emp_name}",
-                             f"{task.get('completed')}",
-                             f"{task.get('title')}",])
+            writer.writerow([f'"{user_ID}"',
+                             f'"{emp_name}"',
+                             f'"{task.get("completed")}"',
+                             f'"{task.get("title")}"'])
