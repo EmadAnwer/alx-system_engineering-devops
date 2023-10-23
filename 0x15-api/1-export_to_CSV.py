@@ -27,10 +27,10 @@ if __name__ == "__main__":
             employee_tasks_list.append(task)
 
     with open(f'{user_ID}.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
         # "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
         for task in employee_tasks_list:
-            writer.writerow([f'"{user_ID}"',
-                             f'"{emp_name}"',
-                             f'"{task.get("completed")}"',
-                             f'"{task.get("title")}"'])
+            writer.writerow([f"{user_ID}",
+                             f"{emp_name}",
+                             f"{task.get('completed')}",
+                             f"{task.get('title')}",])
