@@ -1,0 +1,10 @@
+[unit]
+Description= Gunicorn process to serve the same content as the previous task (web_dynamic/2-hbnb.py)
+After=network.target
+[Service]
+ExecStart=/usr/bin/gunicorn tmux new-session -d 'gunicorn --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app'
+
+
+
+[Install]
+WantedBy=multi-user.target
